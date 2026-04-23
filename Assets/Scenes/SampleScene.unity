@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 816229127}
   - component: {fileID: 816229126}
   - component: {fileID: 816229125}
+  - component: {fileID: 816229129}
   m_Layer: 0
   m_Name: RightPaddle
   m_TagString: Paddle
@@ -695,6 +696,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816229129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816229123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5358e8cb4d29284ea71a5a2811bab39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIMovement
+  ball: {fileID: 1523438440}
+  speed: 3
+  positionOffset: 0.3
+  reactionTime: 0.5
+  errorMargin: 1
 --- !u!1 &1401365914
 GameObject:
   m_ObjectHideFlags: 0
