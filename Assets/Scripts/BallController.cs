@@ -36,4 +36,9 @@ public class BallController : MonoBehaviour
             direction = new Vector2(direction.x, -direction.y).normalized;
         }
     }
+
+    public void Reset(int directionX)
+    {
+        direction = new Vector2(directionX, Random.Range(-0.7f, 0.7f)).normalized;
+    }
 }
