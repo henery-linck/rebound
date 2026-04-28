@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private BallController ball;
     [SerializeField] private Transform ballStartPosition;
+    [SerializeField] private ScoreManager scoreManager;
 
     private int _playerScore;
     private int _aiScore;
@@ -12,12 +13,14 @@ public class GameManager : MonoBehaviour
     public void ScorePlayer()
     { 
         _playerScore++;
+        scoreManager.UpdateScore(_playerScore, _aiScore);
         ResetBall(1);
     }
 
     public void ScoreAI()
     {
         _aiScore++;
+        scoreManager.UpdateScore(_playerScore, _aiScore);
         ResetBall(-1);
     }
 
