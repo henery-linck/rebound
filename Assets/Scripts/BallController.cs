@@ -41,4 +41,10 @@ public class BallController : MonoBehaviour
     {
         direction = new Vector2(directionX, Random.Range(-0.7f, 0.7f)).normalized;
     }
+
+    internal void StopBall()
+    {
+        direction = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
+    }
 }
