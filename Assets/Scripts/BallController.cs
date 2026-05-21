@@ -3,9 +3,13 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hitSound;
 
     private Rigidbody2D rb;
     private Vector2 direction;
+    private float _lastHitTime;
 
     void Start()
     {
@@ -34,6 +38,22 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             direction = new Vector2(direction.x, -direction.y).normalized;
+        }
+
+        if (Time.time - _lastHitTime > 0.05f)
+        {
+            _lastHitTime = Time.time;
+            PlayHitSound();
+        }
+    }
+
+    private void PlayHitSound()
+    {
+        if (hitSound != null && audioSource != null)
+        {
+            float volume = rb.linearVelocity.magnitude / maxSpeed;
+            audioSource.pitch = Random.Range(0.95f, 1.05f);
+            audioSource.PlayOneShot(hitSound);
         }
     }
 
