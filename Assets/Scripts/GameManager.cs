@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int winningScore = 5;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TMPro.TextMeshProUGUI gameOverText;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip victorySound;
+    [SerializeField] private AudioClip defeatSound;
 
     private int _playerScore;
     private int _aiScore;
@@ -49,10 +52,12 @@ public class GameManager : MonoBehaviour
     {
         if (_playerScore >= winningScore)
         {
+            audioSource.PlayOneShot(victorySound);
             EndGame("YOU WIN!");
         }
         else if (_aiScore >= winningScore)
         {
+            audioSource.PlayOneShot(defeatSound);
             EndGame("YOU LOSE!");
         }
     }
