@@ -12,13 +12,17 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 direction;
     private float _lastHitTime;
-    private float _initialSpeed = 5f;    
+    private float _initialSpeed = 5f;
+    private TrailRenderer _trail;
+
+    public TrailRenderer Trail => _trail;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         direction = new Vector2(-1, Random.Range(-0.7f, 0.7f)).normalized;
         _initialSpeed = speed;
+        _trail = GetComponent<TrailRenderer>();
     }
 
     void FixedUpdate()

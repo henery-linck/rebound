@@ -120,8 +120,11 @@ public class GameManager : MonoBehaviour
 
     private void ResetBall(int direction)
     {
+        ball.Trail.enabled = false; // Disable the trail to prevent it from showing during the reset
+        ball.Trail.Clear();
         ball.transform.position = ballStartPosition.position;
         Debug.Log($"Player Score: {_playerScore} | AI Score: {_aiScore}");
         ball.Reset(direction);
+        ball.Trail.enabled = true; // Re-enable the trail after resetting the ball
     }
 }
