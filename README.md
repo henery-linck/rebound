@@ -1,4 +1,4 @@
-# Pong Clone (Name pending)
+# Rebound
 
 A small 2D arcade game inspired by Pong.
 
@@ -8,11 +8,11 @@ This game is part of a personal challenge to create **10 micro-games** to improv
 
 # Game Concept
 
-Pong Clone is a simple arcade game where the player controls a paddle and must bounce a ball back to an AI opponent.
+Rebound is a simple arcade game where the player controls a paddle and must bounce a ball back to an AI opponent.
 
 The goal is to score points by making the ball pass the opponent's paddle.
 
-The first player to reach the target score wins.
+The first player to reach 10 points wins.
 
 ---
 
@@ -30,7 +30,7 @@ S → Move Down
 3. Players bounce the ball with paddles
 4. Ball bounces on walls and paddles
 5. If a player misses the ball, the opponent scores
-6. First player to reach 5 points wins
+6. First player to reach 10 points wins
 
 ---
 
@@ -68,9 +68,6 @@ Small development sessions (~1 hour each):
 
 Possible improvements:
 
-- Increasing ball speed
 - Powerups
-- Multiple balls
 - 2 player local mode
 - Particle effects
-- Ball trails
