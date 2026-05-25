@@ -284,7 +284,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.66, y: 0.02, z: 0}
-  m_LocalScale: {x: 0.5, y: 3, z: 1}
+  m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1144,7 +1144,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.64, y: 0.02, z: 0}
-  m_LocalScale: {x: 0.5, y: 3, z: 1}
+  m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1162,10 +1162,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIMovement
   ball: {fileID: 1523438440}
-  speed: 3
-  positionOffset: 0.3
-  reactionTime: 0.5
-  errorMargin: 1
+  speed: 6.5
+  positionOffset: 0.1
+  reactionTime: 0.3
+  errorMargin: 0.6
+  errorDecreaseRate: 0.1
+  minErrorMargin: 0.2
 --- !u!1 &962886146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,12 +1358,13 @@ MonoBehaviour:
   ball: {fileID: 1523438443}
   ballStartPosition: {fileID: 1531463224}
   scoreManager: {fileID: 1253801839}
-  winningScore: 3
+  winningScore: 7
   gameOverPanel: {fileID: 962886146}
   gameOverText: {fileID: 291449853}
   audioSource: {fileID: 1253801840}
   victorySound: {fileID: 8300000, guid: c5ca915ee871bc44b81fcbe6e2696f85, type: 3}
   defeatSound: {fileID: 8300000, guid: a3860bce36f88e247aba15442750e41c, type: 3}
+  aiMovement: {fileID: 816229129}
 --- !u!4 &1253801838
 Transform:
   m_ObjectHideFlags: 0
@@ -1872,10 +1875,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9910778c393734cb889de5edf968f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallController
-  speed: 5
-  maxSpeed: 10
+  speed: 6.5
+  maxSpeed: 15
+  speedIncreaseFactor: 0.5
   audioSource: {fileID: 1523438444}
   hitSound: {fileID: 8300000, guid: 2d98cf19ecbab3c4dbd3b79bb58e4295, type: 3}
+  hitOffsetModifier: 1
 --- !u!82 &1523438444
 AudioSource:
   m_ObjectHideFlags: 0

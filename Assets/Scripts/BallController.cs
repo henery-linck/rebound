@@ -3,19 +3,22 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float maxSpeed = 12f;
+    [SerializeField] private float speedIncreaseFactor = 0.2f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip hitSound;
+    [SerializeField] private float hitOffsetModifier = 1.0f;
 
     private Rigidbody2D rb;
     private Vector2 direction;
     private float _lastHitTime;
+    private float _initialSpeed = 5f;    
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         direction = new Vector2(-1, Random.Range(-0.7f, 0.7f)).normalized;
+        _initialSpeed = speed;
     }
 
     void FixedUpdate()
@@ -28,11 +31,14 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Paddle"))
         {
             float hitOffset = transform.position.y - collision.transform.position.y;
+            hitOffset *= hitOffsetModifier;
 
             direction = new Vector2(
                 -direction.x,
                 direction.y + hitOffset * 0.5f
             ).normalized;
+
+            speed = Mathf.Min(speed + speedIncreaseFactor, maxSpeed);
         }
 
         if (collision.gameObject.CompareTag("Wall"))
@@ -60,6 +66,7 @@ public class BallController : MonoBehaviour
     public void Reset(int directionX)
     {
         direction = new Vector2(directionX, Random.Range(-0.7f, 0.7f)).normalized;
+        speed = _initialSpeed;
     }
 
     internal void StopBall()

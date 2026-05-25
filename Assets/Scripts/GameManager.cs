@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip victorySound;
     [SerializeField] private AudioClip defeatSound;
+    [SerializeField] private AIMovement aiMovement;
 
     private int _playerScore;
     private int _aiScore;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void RestartGame()
     {
+        aiMovement.ResetErrorMargin();
         _playerScore = 0;
         _aiScore = 0;
         _gameOver = false;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         _playerScore++;
         CheckGameOver();
         scoreManager.UpdateScore(_playerScore, _aiScore);
+        aiMovement.DecreaseErrorMargin();
 
         if (!_gameOver)
             ResetBall(1);

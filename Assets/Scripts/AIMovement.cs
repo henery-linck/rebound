@@ -4,11 +4,14 @@ using UnityEngine;
 public class AIMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D ball;
-    [SerializeField] private float speed = 4f; // Speed of the AI movement
+    [SerializeField] private float speed = 5f; // Speed of the AI movement
     [SerializeField] private float positionOffset = 0.2f; // Offset to prevent jittery movement
     [SerializeField] private float reactionTime = 0.3f; // Time delay before the AI reacts to the ball's movement
-    [SerializeField] private float errorMargin = 0.5f;
+    [SerializeField] private float errorMargin = 0.7f; // Margin of error for the AI's movement (0 = perfect, 1 = completely random)
+    [SerializeField] private float errorDecreaseRate = 0.1f; // Rate at which the error margin decreases over time
+    [SerializeField] private float minErrorMargin = 0.3f; // Minimum error margin for the AI's movement
 
+    private float _initialErrorMargin;
     private Rigidbody2D _rigidBody;
     Vector2 _ballDirection;
     private float _targetY;
@@ -16,6 +19,7 @@ public class AIMovement : MonoBehaviour
 
     private void Start()
     {
+        _initialErrorMargin = errorMargin;
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -53,5 +57,15 @@ public class AIMovement : MonoBehaviour
         {
             _rigidBody.linearVelocity = Vector2.zero;
         }
+    }
+
+    public void DecreaseErrorMargin()
+    {
+        errorMargin = Mathf.Max(minErrorMargin, errorMargin - errorDecreaseRate);
+    }
+
+    public void ResetErrorMargin()
+    {
+        errorMargin = _initialErrorMargin;
     }
 }
