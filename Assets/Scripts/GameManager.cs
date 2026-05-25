@@ -1,22 +1,53 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game Settings")]
     [SerializeField] private BallController ball;
     [SerializeField] private Transform ballStartPosition;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private int winningScore = 5;
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private TMPro.TextMeshProUGUI gameOverText;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip victorySound;
     [SerializeField] private AudioClip defeatSound;
     [SerializeField] private AIMovement aiMovement;
 
+    [Header("UI Objects")]
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject scorePanel;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TextMeshProUGUI gameOverText;
+
     private int _playerScore;
     private int _aiScore;
     private bool _gameOver;
+
+    public static bool SkipMenu { get; set; } = false; // Static property to determine whether to skip the menu
+
+    private void Start()
+    {
+        if (SkipMenu)
+        {
+            SkipMenu = false; // Reset SkipMenu to false for the next time the game starts
+            StartGame(); // If SkipMenu is true, start the game immediately
+            return;
+        }
+
+        Time.timeScale = 0; // Pause the game by setting time scale to 0
+        menuPanel.SetActive(true); // Show the menu panel
+        scorePanel.SetActive(false); // Hide the score panel
+        gameOverPanel.SetActive(false); // Hide the game over panel
+    }
+
+    public void StartGame()
+    {
+        menuPanel.SetActive(false); // Hide the menu panel
+        scorePanel.SetActive(true); // Show the score panel
+
+        Time.timeScale = 1f; // Resume the game by setting time scale to 1
+    }
 
     private void Update()
     {
